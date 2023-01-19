@@ -19,6 +19,19 @@
     </repository>
   </distributionManagement>
 
+  <repositories>
+    <repository>
+      <id>github</id>
+      <url>https://maven.pkg.github.com/simonnordberg/cosmos-root</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+
   <properties>
     <mainClass>com.simonnordberg.cosmos.movie.api.MovieServer</mainClass>
     <maven.compiler.source>17</maven.compiler.source>

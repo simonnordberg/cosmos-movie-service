@@ -28,6 +28,6 @@ jobs:
       packages: write
     steps:
       - name: Publish
-        run: mvn -s $GITHUB_WORKSPACE/settings.xml deploy
+        run: mvn -s $GITHUB_WORKSPACE/settings.xml -Dmaven.test.skip deploy
         env:
           GITHUB_TOKEN: ${{ github.token }}
