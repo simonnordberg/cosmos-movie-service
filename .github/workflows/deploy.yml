@@ -6,10 +6,6 @@ on:
     types:
       - completed
 
-env:
-  NOMAD_ADDR: ${{ secrets.NOMAD_ADDR }}
-  NOMAD_TOKEN: ${{ secrets.NOMAD_TOKEN }}
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -22,6 +18,9 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Run plan
+        env:
+          NOMAD_ADDR: ${{ secrets.NOMAD_ADDR }}
+          NOMAD_TOKEN: ${{ secrets.NOMAD_TOKEN }}
         run: >
           docker run 
           -v ${{ github.workspace }}:/app 
