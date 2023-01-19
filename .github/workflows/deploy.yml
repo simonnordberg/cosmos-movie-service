@@ -18,15 +18,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Show vars
-        shell: bash
-        env:
-          NOMAD_ADDR: ${{ secrets.NOMAD_ADDR }}
-          NOMAD_TOKEN: ${{ secrets.NOMAD_TOKEN }}
-        run: |
-          echo "Hello $NOMAD_TOKEN"
-
-      - name: Run plan
+      - name: Run nomad deploy
         shell: bash
         env:
           NOMAD_ADDR: ${{ secrets.NOMAD_ADDR }}
@@ -36,4 +28,4 @@ jobs:
           -v ${{ github.workspace }}:/app 
           -e NOMAD_ADDR -e NOMAD_TOKEN
           hashicorp/levant:latest
-          plan /app/nomad/cosmos-movie-service.nomad
+          deploy /app/nomad/cosmos-movie-service.nomad
