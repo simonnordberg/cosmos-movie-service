@@ -7,7 +7,6 @@ on:
       - completed
 
 env:
-  REGISTRY: ghcr.io
   NOMAD_ADDR: ${{ secrets.NOMAD_ADDR }}
   NOMAD_TOKEN: ${{ secrets.NOMAD_TOKEN }}
 
@@ -29,5 +28,4 @@ jobs:
           -e NOMAD_ADDR -e NOMAD_TOKEN
           hashicorp/levant:latest
           plan /app/nomad/cosmos-movie-service.nomad
-        with:
 
