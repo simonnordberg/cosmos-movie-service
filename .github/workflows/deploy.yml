@@ -21,12 +21,10 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Run plan
-        uses: addnab/docker-run-action@v3
-        with:
-          image: hashicorp/levant:latest
-          registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-          options: -v ${{ github.workspace }}:/app -e NOMAD_ADDR=${{ secrets.NOMAD_ADDR }} -e NOMAD_TOKEN=${{ secrets.NOMAD_TOKEN }}
-          run: |
-            levant plan /app/nomad/cosmos-movie-service.nomad
+        run: >-
+          docker run 
+            -v ${{ github.workspace }}:/app 
+            -e NOMAD_ADDR=${{ secrets.NOMAD_ADDR }} 
+            -e NOMAD_TOKEN=${{ secrets.NOMAD_TOKEN }}
+            hashicorp/levant:latest
+            plan /app/nomad/cosmos-movie-service.nomad
