@@ -1,4 +1,4 @@
-name: deploy
+name: Deploy
 on:
   workflow_run:
     workflows: [ Build ]
@@ -12,14 +12,6 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container:
-      image: hashicorp/levant:latest
-      volumes:
-        - ${{ github.workspace }}:/app
-      env:
-        NOMAD_ADDR: ${{ secrets.NOMAD_ADDR }}
-        NOMAD_TOKEN: ${{ secrets.NOMAD_TOKEN }}
-
     permissions:
       contents: read
       packages: read
@@ -28,15 +20,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Log in to the Container registry
-        uses: docker/login-action@v2
+      - name: Run plan
+        uses: addnab/docker-run-action@v3
         with:
+          image: hashicorp/levant:latest
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Run plan
-        run: plan /app/nomad/cosmos-movie-service.nomad
-
-      - name: Run deploy
-        run: deploy /app/nomad/cosmos-movie-service.nomad
+          options: -v ${{ github.workspace }}:/app -e NOMAD_ADDR=${{ secrets.NOMAD_ADDR }} -e NOMAD_TOKEN=${{ secrets.NOMAD_TOKEN }}
+          run: |
+            plan /app/nomad/cosmos-movie-service.nomad
