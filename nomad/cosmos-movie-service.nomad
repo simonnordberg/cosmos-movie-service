@@ -9,7 +9,7 @@ job "movie-service-job" {
   }
 
   group "movie-service-group" {
-    count = 5
+    count = 3
 
     network {
       port "grpc" {
