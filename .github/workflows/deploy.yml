@@ -28,4 +28,4 @@ jobs:
           -v ${{ github.workspace }}:/app 
           -e NOMAD_ADDR -e NOMAD_TOKEN
           hashicorp/levant:latest
-          deploy /app/nomad/cosmos-movie-service.nomad
+          deploy -ignore-no-changes /app/nomad/cosmos-movie-service.nomad
