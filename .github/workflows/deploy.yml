@@ -29,4 +29,4 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
           options: -v ${{ github.workspace }}:/app -e NOMAD_ADDR=${{ secrets.NOMAD_ADDR }} -e NOMAD_TOKEN=${{ secrets.NOMAD_TOKEN }}
           run: |
-            plan /app/nomad/cosmos-movie-service.nomad
+            nomad-pack plan /app/nomad/cosmos-movie-service.nomad
