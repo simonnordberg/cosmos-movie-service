@@ -18,6 +18,8 @@ jobs:
           settings-path: ${{ github.workspace }}
       - name: Build
         run: mvn -s $GITHUB_WORKSPACE/settings.xml -B -f pom.xml verify
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
 
   publish:
     runs-on: ubuntu-latest
