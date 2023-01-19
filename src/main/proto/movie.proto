@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.simonnordberg.cosmos.api";
+
+package cosmos;
+
+service MovieService {
+  rpc GetMovies (MoviesQuery) returns (stream Movie) {}
+  rpc GetMovie (MovieQuery) returns (Movie) {}
+}
+
+message MoviesQuery {
+  string query = 1;
+}
+
+message MovieQuery {
+  string id = 1;
+}
+
+message Movie {
+  string id = 1;
+  string name = 2;
+}
