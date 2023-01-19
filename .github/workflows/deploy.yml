@@ -21,10 +21,10 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Run plan
-        run: >-
+        run: >
           docker run 
-            -v ${{ github.workspace }}:/app 
-            -e NOMAD_ADDR=${{ secrets.NOMAD_ADDR }} 
-            -e NOMAD_TOKEN=${{ secrets.NOMAD_TOKEN }}
-            hashicorp/levant:latest
-            plan /app/nomad/cosmos-movie-service.nomad
+          -v ${{ github.workspace }}:/app 
+          -e NOMAD_ADDR=${{ secrets.NOMAD_ADDR }} 
+          -e NOMAD_TOKEN=${{ secrets.NOMAD_TOKEN }}
+          hashicorp/levant:latest
+          plan /app/nomad/cosmos-movie-service.nomad
